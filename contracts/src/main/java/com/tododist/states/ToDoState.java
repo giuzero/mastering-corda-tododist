@@ -1,12 +1,13 @@
-package com.template.states;
+package com.tododist.states;
 
-import com.template.contracts.TemplateContract;
+import com.tododist.contracts.TemplateContract;
 import net.corda.core.contracts.BelongsToContract;
 import net.corda.core.contracts.ContractState;
 import net.corda.core.contracts.LinearState;
 import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
+import net.corda.core.serialization.ConstructorForDeserialization;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,21 +20,34 @@ public class ToDoState implements ContractState, LinearState {
 
     //private variables
     private final UniqueIdentifier linearId = new UniqueIdentifier();
-    private final String taskDecription;
+    private final String taskDescription;
     private final Party assignedBy;
     private final Party assignedTo;
 
     /* Constructor of your Corda state */
-    public ToDoState(Party assignedBy, Party assignedTo, String taskDecription) {
+    public ToDoState(Party assignedBy, Party assignedTo, String taskDescription) {
         this.assignedBy = assignedBy;
         this.assignedTo = assignedTo;
-        this.taskDecription = taskDecription;
+        this.taskDescription = taskDescription;
+    }
+/*
+    //Constructor for keeping the liearId
+    @ConstructorForDeserialization
+    public ToDoState(Party assignedBy, Party assignedTo, String taskDescription, UniqueIdentifier linearId){
+        this.assignedBy = assignedBy;
+        this.assignedTo = assignedTo;
+        this.taskDescription = taskDescription;
+        this.linearId = linearId;
     }
 
+    public ToDoState assign(Party assignedTo){
+        return new ToDoState(assignedBy, assignedTo, taskDescription, linearId);
+    }
+*/
     //getters
     public Party getAssignedBy() { return assignedBy; }
     public Party getAssignedTo() { return assignedTo; }
-    public String getTaskDescriprion() { return taskDecription; }
+    public String getTaskDescription() { return taskDescription; }
 
     /*
     need these method for a linear state

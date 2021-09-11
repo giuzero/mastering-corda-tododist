@@ -1,4 +1,4 @@
-package com.template;
+package com.tododist;
 
 import com.google.common.collect.ImmutableList;
 import net.corda.core.concurrent.CordaFuture;

@@ -1,6 +1,6 @@
-package com.template.contracts;
+package com.tododist.contracts;
 
-import com.template.states.ToDoState;
+import com.tododist.states.ToDoState;
 import net.corda.core.identity.CordaX500Name;
 import net.corda.testing.core.TestIdentity;
 import net.corda.testing.node.MockServices;
@@ -12,7 +12,7 @@ import static net.corda.testing.node.NodeTestUtils.ledger;
 
 
 public class ContractTests {
-    private final MockServices ledgerServices = new MockServices(Arrays.asList("com.template"));
+    private final MockServices ledgerServices = new MockServices(Arrays.asList("com.tododist"));
     TestIdentity alice = new TestIdentity(new CordaX500Name("Alice",  "TestLand",  "US"));
     TestIdentity bob = new TestIdentity(new CordaX500Name("Alice",  "TestLand",  "US"));
 
@@ -21,14 +21,14 @@ public class ContractTests {
         ToDoState state = new ToDoState("Hello-World",alice.getParty(),bob.getParty());
         ledger(ledgerServices, l -> {
             l.transaction(tx -> {
-                tx.input(TemplateContract.ID, state);
-                tx.output(TemplateContract.ID, state);
-                tx.command(alice.getPublicKey(), new TemplateContract.Commands.Send());
+                tx.input(DummyCommand.ID, state);
+                tx.output(DummyCommand.ID, state);
+                tx.command(alice.getPublicKey(), new DummyCommand.Commands.Send());
                 return tx.fails(); //fails because of having inputs
             });
             l.transaction(tx -> {
-                tx.output(TemplateContract.ID, state);
-                tx.command(alice.getPublicKey(), new TemplateContract.Commands.Send());
+                tx.output(DummyCommand.ID, state);
+                tx.command(alice.getPublicKey(), new DummyCommand.Commands.Send());
                 return tx.verifies();
             });
             return null;

@@ -1,6 +1,6 @@
-package com.template.contracts;
+package com.tododist.contracts;
 
-import com.template.states.ToDoState;
+import com.tododist.states.ToDoState;
 import org.junit.Test;
 
 public class StateTests {

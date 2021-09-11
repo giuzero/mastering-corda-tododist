@@ -1,8 +1,8 @@
-package com.template;
+package com.tododist;
 
 import com.google.common.collect.ImmutableList;
-import com.template.flows.TemplateFlow;
-import com.template.states.ToDoState;
+import com.tododist.flows.CreateToDoFlow;
+import com.tododist.states.ToDoState;
 import net.corda.core.node.services.Vault;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
@@ -24,8 +24,8 @@ public class FlowTests {
     @Before
     public void setup() {
         network = new MockNetwork(new MockNetworkParameters().withCordappsForAllNodes(ImmutableList.of(
-                TestCordapp.findCordapp("com.template.contracts"),
-                TestCordapp.findCordapp("com.template.flows"))));
+                TestCordapp.findCordapp("com.tododist.contracts"),
+                TestCordapp.findCordapp("com.tododist.flows"))));
         a = network.createPartyNode(null);
         b = network.createPartyNode(null);
         network.runNetwork();
@@ -38,7 +38,7 @@ public class FlowTests {
 
     @Test
     public void dummyTest() {
-        TemplateFlow.TemplateFlowInitiator flow = new TemplateFlow.TemplateFlowInitiator(b.getInfo().getLegalIdentities().get(0));
+        CreateToDoFlow.TemplateFlowInitiator flow = new CreateToDoFlow.TemplateFlowInitiator(b.getInfo().getLegalIdentities().get(0));
         Future<SignedTransaction> future = a.startFlow(flow);
         network.runNetwork();
 
