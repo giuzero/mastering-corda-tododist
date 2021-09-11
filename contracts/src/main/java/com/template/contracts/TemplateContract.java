@@ -1,14 +1,11 @@
 package com.template.contracts;
 
-import com.template.states.TemplateState;
+import com.template.states.ToDoState;
 import net.corda.core.contracts.CommandData;
-import net.corda.core.contracts.CommandWithParties;
 import net.corda.core.contracts.Contract;
 import net.corda.core.transactions.LedgerTransaction;
 
-import static net.corda.core.contracts.ContractsDSL.requireSingleCommand;
 import static net.corda.core.contracts.ContractsDSL.requireThat;
-import java.util.List;
 
 // ************
 // * Contract *
@@ -29,7 +26,7 @@ public class TemplateContract implements Contract {
 
         if (commandData instanceof Commands.Send) {
             //Retrieve the output state of the transaction
-            TemplateState output = tx.outputsOfType(TemplateState.class).get(0);
+            ToDoState output = tx.outputsOfType(ToDoState.class).get(0);
 
             //Using Corda DSL function requireThat to replicate conditions-checks
             requireThat(require -> {

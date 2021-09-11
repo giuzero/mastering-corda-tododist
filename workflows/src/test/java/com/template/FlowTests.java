@@ -2,7 +2,7 @@ package com.template;
 
 import com.google.common.collect.ImmutableList;
 import com.template.flows.TemplateFlow;
-import com.template.states.TemplateState;
+import com.template.states.ToDoState;
 import net.corda.core.node.services.Vault;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
@@ -44,7 +44,7 @@ public class FlowTests {
 
         //successful query means the state is stored at node b's vault. Flow went through.
         QueryCriteria inputCriteria = new QueryCriteria.VaultQueryCriteria().withStatus(Vault.StateStatus.UNCONSUMED);
-        TemplateState state = b.getServices().getVaultService()
-                .queryBy(TemplateState.class,inputCriteria).getStates().get(0).getState().getData();
+        ToDoState state = b.getServices().getVaultService()
+                .queryBy(ToDoState.class,inputCriteria).getStates().get(0).getState().getData();
     }
 }

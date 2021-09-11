@@ -2,7 +2,7 @@ package com.template.flows;
 
 import co.paralleluniverse.fibers.Suspendable;
 import com.template.contracts.TemplateContract;
-import com.template.states.TemplateState;
+import com.template.states.ToDoState;
 import net.corda.core.flows.*;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
@@ -39,7 +39,7 @@ public class TemplateFlow {
             final Party notary = getServiceHub().getNetworkMapCache().getNotaryIdentities().get(0);
 
             //Compose the State that carries the Hello World message
-            final TemplateState output = new TemplateState(msg,sender,receiver);
+            final ToDoState output = new ToDoState(msg,sender,receiver);
 
             // Step 3. Create a new TransactionBuilder object.
             final TransactionBuilder builder = new TransactionBuilder(notary);

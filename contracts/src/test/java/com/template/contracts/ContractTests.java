@@ -1,6 +1,6 @@
 package com.template.contracts;
 
-import com.template.states.TemplateState;
+import com.template.states.ToDoState;
 import net.corda.core.identity.CordaX500Name;
 import net.corda.testing.core.TestIdentity;
 import net.corda.testing.node.MockServices;
@@ -18,7 +18,7 @@ public class ContractTests {
 
     @Test
     public void issuerAndRecipientCannotHaveSameEmail() {
-        TemplateState state = new TemplateState("Hello-World",alice.getParty(),bob.getParty());
+        ToDoState state = new ToDoState("Hello-World",alice.getParty(),bob.getParty());
         ledger(ledgerServices, l -> {
             l.transaction(tx -> {
                 tx.input(TemplateContract.ID, state);
