@@ -1,5 +1,6 @@
 package com.tododist.states;
 
+import org.jetbrains.annotations.NotNull;
 import com.tododist.contracts.TemplateContract;
 import net.corda.core.contracts.BelongsToContract;
 import net.corda.core.contracts.ContractState;
@@ -12,14 +13,11 @@ import net.corda.core.serialization.ConstructorForDeserialization;
 import java.util.Arrays;
 import java.util.List;
 
-// *********
-// * State *
-// *********
 @BelongsToContract(TemplateContract.class)
-public class ToDoState implements ContractState, LinearState {
+public class ToDoState implements LinearState, ContractState {
 
     //private variables
-    private final UniqueIdentifier linearId = new UniqueIdentifier();
+    private final UniqueIdentifier linearId; //I MUST NOT GIVE VALUE NOW!
     private final String taskDescription;
     private final Party assignedBy;
     private final Party assignedTo;
@@ -29,9 +27,10 @@ public class ToDoState implements ContractState, LinearState {
         this.assignedBy = assignedBy;
         this.assignedTo = assignedTo;
         this.taskDescription = taskDescription;
+        this.linearId = new UniqueIdentifier();
     }
-/*
-    //Constructor for keeping the liearId
+
+    //Constructor for keeping the linearId
     @ConstructorForDeserialization
     public ToDoState(Party assignedBy, Party assignedTo, String taskDescription, UniqueIdentifier linearId){
         this.assignedBy = assignedBy;
@@ -43,7 +42,7 @@ public class ToDoState implements ContractState, LinearState {
     public ToDoState assign(Party assignedTo){
         return new ToDoState(assignedBy, assignedTo, taskDescription, linearId);
     }
-*/
+
     //getters
     public Party getAssignedBy() { return assignedBy; }
     public Party getAssignedTo() { return assignedTo; }
@@ -58,6 +57,7 @@ public class ToDoState implements ContractState, LinearState {
     }
 
     @Override
+    @NotNull
     public UniqueIdentifier getLinearId(){
         return linearId;
     }
