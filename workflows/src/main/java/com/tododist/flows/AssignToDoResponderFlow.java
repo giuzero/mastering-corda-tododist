@@ -19,7 +19,7 @@ public class AssignToDoResponderFlow extends FlowLogic<SignedTransaction> {
         final SignTransactionFlow signTransactionFlow = new SignTransactionFlow(counterPartySession) {
             @Override
             protected void checkTransaction(@NotNull SignedTransaction stx) throws FlowException {
-                System.out.println("check!!");
+                System.out.println("checked!!");
             }
         };
         SignedTransaction stx = subFlow(signTransactionFlow);

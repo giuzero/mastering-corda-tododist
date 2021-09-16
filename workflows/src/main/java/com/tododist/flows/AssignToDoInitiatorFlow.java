@@ -2,6 +2,7 @@ package com.tododist.flows;
 
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.tododist.contracts.Command;
 import com.tododist.contracts.DummyCommand;
 import com.tododist.states.ToDoState;
 import net.corda.core.contracts.StateAndRef;
@@ -56,7 +57,7 @@ public class AssignToDoInitiatorFlow extends FlowLogic<String> {
         //Get the notary to build transaction
         Party notary = sb.getNetworkMapCache().getNotaryIdentities().get(0);
         TransactionBuilder tb = new TransactionBuilder(notary).addInputState(currentStateAndRefToDo)
-                .addOutputState(newToDoState).addCommand(new DummyCommand(), myKey, counterPartyKey);
+                .addOutputState(newToDoState).addCommand(new Command.AssignToDoCommand(), myKey, counterPartyKey);
         SignedTransaction ptx = getServiceHub().signInitialTransaction(tb);
 
         //transaction is ready to be signed by parties --> use FlowSession

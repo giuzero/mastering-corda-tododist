@@ -3,7 +3,7 @@
 BUILD <project folder>\gradlew deployNodes
 RUN <project folder>\build\nodes runnodes.bat
 
-chapter6
+#chapter6
 ContractState, Linearstate: override geParticipants() and getLinearId()
 Contract implements FlowLogic must override call method (if Void, must explicitly return null)
 DO NOT REFACTOR EXISTING CLASS!!! JUST ADD WHAT YOU NEED!!! @BelongsToContract(TemplateContract.class) need template files!
@@ -44,3 +44,15 @@ node {
     }
 
 Put guava dependencies (ImmutableList) into build.gradle/allProjects/dependencies
+
+#chapter7
+command=intent of transition
+contracts=business validation rules
+corda contracts != smart contracts
+corda contracts != legal contracts
+Contracts are deterministic
+Contracts need interface class
+Contracts need to override verify(LedgerTransaction) method
+states are related to contracts
+If u got a lot of validation rules use require (lambda)
+

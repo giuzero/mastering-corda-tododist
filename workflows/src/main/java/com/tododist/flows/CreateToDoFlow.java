@@ -1,6 +1,7 @@
 package com.tododist.flows;
 
 import co.paralleluniverse.fibers.Suspendable;
+import com.tododist.contracts.Command;
 import com.tododist.contracts.DummyCommand;
 import com.tododist.states.ToDoState;
 import net.corda.core.flows.*;
@@ -32,7 +33,7 @@ import java.util.Collections;
             ToDoState ts = new ToDoState(me,me,taskDescription);
             TransactionBuilder tb = new TransactionBuilder(notary);
             tb.addOutputState(ts);
-            tb = tb.addCommand(new DummyCommand(), me.getOwningKey());
+            tb = tb.addCommand(new Command.CreateToDoCommand(), me.getOwningKey());
             //Finality is not required since we do not need notary to sign and assigner = assignee
             SignedTransaction stx = getServiceHub().signInitialTransaction(tb);
             subFlow(new FinalityFlow(stx, Collections.<FlowSession>emptySet()));

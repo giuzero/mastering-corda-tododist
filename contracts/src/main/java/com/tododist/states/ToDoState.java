@@ -1,5 +1,6 @@
 package com.tododist.states;
 
+import com.tododist.contracts.ToDoContract;
 import org.jetbrains.annotations.NotNull;
 import com.tododist.contracts.TemplateContract;
 import net.corda.core.contracts.BelongsToContract;
@@ -13,7 +14,7 @@ import net.corda.core.serialization.ConstructorForDeserialization;
 import java.util.Arrays;
 import java.util.List;
 
-@BelongsToContract(TemplateContract.class)
+@BelongsToContract(ToDoContract.class)
 public class ToDoState implements LinearState, ContractState {
 
     //private variables
